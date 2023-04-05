@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.training);
-        DailyFragment fragment = new DailyFragment();
+        TrainingFragment fragment = new TrainingFragment();
         runFragment(fragment);
     }
 

@@ -1,14 +1,23 @@
 package com.omshanti.workout.model;
 
 public class TChallenge {
-    String title, subtitle;
+    String title;
     String dayleft, percompleted;
+    int image;
 
-    public TChallenge(String title, String subtitle, String dayleft, String percompleted) {
+    public TChallenge(int image, String title, String dayleft, String percompleted) {
+        this.image = image;
         this.title = title;
-        this.subtitle = subtitle;
         this.dayleft = dayleft;
         this.percompleted = percompleted;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public String getTitle() {
@@ -17,14 +26,6 @@ public class TChallenge {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
     }
 
     public String getDayleft() {

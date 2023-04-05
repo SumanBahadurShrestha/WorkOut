@@ -87,4 +87,18 @@ public class AllSharePerference {
         return sharedPreferences.getString("selectedHeightWeight", "");
     }
 
+
+
+    //Daily Fragment Part
+    //Step Count
+    public boolean setStep(boolean step) {
+        Editor editor =sharedPreferences.edit();
+        editor.putBoolean("stepTarget", step);
+        editor.commit();
+        return true;
+    }
+    public boolean getStep() {
+        return sharedPreferences.getBoolean("stepTarget", true);
+    }
+
 }

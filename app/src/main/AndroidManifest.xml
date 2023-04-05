@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
     <application
         android:name=".component.AppEnv"
@@ -16,6 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkOut"
         tools:targetApi="31">
+        <activity
+            android:name=".daily.BodyMeasureActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".daily.BMIActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".daily.WaterActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".daily.StepActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".FilterContainerActivity"
             android:exported="false">

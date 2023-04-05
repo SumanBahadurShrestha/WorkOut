@@ -1,27 +1,33 @@
 package com.omshanti.workout.bottom;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.omshanti.workout.R;
-import com.omshanti.workout.adapter.PlannedBodyPartAdapter;
+import com.omshanti.workout.component.AppEnv;
+import com.omshanti.workout.daily.BMIActivity;
+import com.omshanti.workout.daily.BodyMeasureActivity;
+import com.omshanti.workout.daily.StepActivity;
+import com.omshanti.workout.daily.WaterActivity;
 
 public class DailyFragment extends Fragment {
-    ViewPager2 viewpager;
-    ListView listViewFixed;
-    PlannedBodyPartAdapter bodyPartAdapter;
+    AppEnv appEnv;
     Context mContext;
-
+    CardView cardViewstep, cardViewwater, cardViewbmi, cardViewmeasure;
+    Button buttonStep, buttonWater, buttonBmi, buttonBody;
+    //hidden part
+    TextView textViewShowStep;
+    ProgressBar progressBarStep;
     public DailyFragment() {
         // Required empty public constructor
     }
@@ -32,30 +38,85 @@ public class DailyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
         mContext = getContext();
-        viewpager = (ViewPager2) view.findViewById(R.id.viewPager2);
-        listViewFixed = (ListView) view.findViewById(R.id.listView_fix_plan);
-        bodyPartAdapter = new PlannedBodyPartAdapter(mContext);
-        viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        viewpager.setOffscreenPageLimit(3);
-        viewpager.setAdapter(bodyPartAdapter);
-        float pageMargin= getResources().getDimensionPixelOffset(R.dimen.pageMargin);
-        float pageOffset = getResources().getDimensionPixelOffset(R.dimen.offset);
-        viewpager.setPageTransformer(new ViewPager2.PageTransformer() {
+        appEnv = (AppEnv) getActivity().getApplicationContext();
+        cardViewstep = (CardView) view.findViewById(R.id.cardView_step_count);
+        cardViewwater = (CardView) view.findViewById(R.id.cardView_water_intake);
+        cardViewbmi = (CardView) view.findViewById(R.id.cardView_bmi);
+        cardViewmeasure = (CardView) view.findViewById(R.id.cardView_body_measure);
+        buttonStep = (Button) view.findViewById(R.id.set_step);
+        buttonWater = (Button) view.findViewById(R.id.set_water_intake);
+        buttonBmi = (Button) view.findViewById(R.id.calculate_bmi);
+        buttonBody = (Button) view.findViewById(R.id.measure_body);
+        textViewShowStep = (TextView) view.findViewById(R.id.show_total_step);
+        progressBarStep = (ProgressBar) view.findViewById(R.id.progress_bar);
+        //get value
+        boolean getstepvalue = appEnv.sharePerference.getStep();
+        if (getstepvalue) {
+            buttonStep.setVisibility(View.VISIBLE);
+            textViewShowStep.setVisibility(View.GONE);
+            progressBarStep.setVisibility(View.GONE);
+        }
+        else{
+            buttonStep.setVisibility(View.GONE);
+            textViewShowStep.setVisibility(View.VISIBLE);
+            progressBarStep.setVisibility(View.VISIBLE);
+        }
+        buttonStep.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void transformPage(@NonNull View page, float position) {
-                float myOffset = position * -(2 * pageOffset + pageMargin);
-                if (viewpager.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
-                    if (ViewCompat.getLayoutDirection(viewpager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                        page.setTranslationX(-myOffset);
-                    } else {
-                        page.setTranslationX(myOffset);
-                    }
-                } else {
-                    page.setTranslationY(myOffset);
-                }
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), StepActivity.class);
+                intent.putExtra("setStep", getstepvalue);
+                startActivity(intent);
             }
         });
-
+        buttonWater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), WaterActivity.class);
+                intent.putExtra("setWater", true);
+                startActivity(intent);
+            }
+        });
+        buttonBmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BMIActivity.class);
+                intent.putExtra("calculateBmi", true);
+                startActivity(intent);
+            }
+        });
+        buttonBody.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BodyMeasureActivity.class);
+                intent.putExtra("measureBody", true);
+                startActivity(intent);
+            }
+        });
+        cardViewstep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), StepActivity.class));
+            }
+        });
+        cardViewbmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), BMIActivity.class));
+            }
+        });
+        cardViewmeasure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), BodyMeasureActivity.class));
+            }
+        });
+        cardViewwater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), WaterActivity.class));
+            }
+        });
         return view;
     }
 }

@@ -1,108 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:contentDescription="@string/nestscroll"
-    android:fillViewport="true"
+    android:orientation="vertical"
     tools:context=".bottom.DailyFragment">
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#EFEFEF">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="DAILY"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/ic_outline_settings_24"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.cardview.widget.CardView
+        android:background="#EFEFEF">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
-            android:layout_margin="10dp">
-            <RelativeLayout
+            android:orientation="vertical">
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
-                <TextView
-                    android:id="@+id/recent_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Recent"
-                    android:layout_alignParentStart="true"
-                    android:textSize="15sp"
-                    android:layout_margin="5dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="More"
-                    android:layout_alignParentEnd="true"
-                    android:padding="3dp"
-                    android:textColor="#D19E06"/>
-                <LinearLayout
+                android:layout_marginEnd="10dp"
+                android:background="@color/black"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_step_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@+id/recent_title">
-                    <androidx.cardview.widget.CardView
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/image_step_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="0dp"
-                        android:layout_margin="5dp">
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/dummy_img"/>
-                    </androidx.cardview.widget.CardView>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Lift butt and flatten belly"
-                            android:textStyle="bold"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginBottom="1dp"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="0.0% completed, 60days left"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginStart="5dp"/>
-                    </LinearLayout>
-                </LinearLayout>
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/measure_step"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step Count"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@id/image_step_count"/>
+                    <TextView
+                        android:id="@+id/step_cout_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_margin="3dp"
+                        android:text="Track daily steps and keep you motivate!"
+                        android:textStyle="normal"
+                        android:layout_below="@id/image_step_count"
+                        android:layout_centerHorizontal="true"/>
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="My Plan"
-            android:textSize="18sp"
-            android:layout_marginTop="5dp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"/>
-        <androidx.viewpager2.widget.ViewPager2
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/viewPager2"
-            android:layout_margin="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="7 x 4 Challenge"
-            android:textSize="18sp"
-            android:layout_marginTop="5dp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"/>
-        <ListView
-            android:id="@+id/listView_fix_plan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"/>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+                    <Button
+                        android:id="@+id/set_step"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/step_cout_desc"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button_background_2"
+                        android:paddingStart="35dp"
+                        android:paddingEnd="35dp"
+                        android:text="Set Step"
+                        android:textSize="13sp"
+                        android:textStyle="normal" />
+                    <TextView
+                        android:id="@+id/show_total_step"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5000/6000"
+                        android:visibility="gone"
+                        android:layout_below="@id/step_cout_desc"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"/>
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/show_total_step"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:max="6000"
+                        android:progress="5000"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_water_intake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/image_water_intake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/measure_water"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Water tracker"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@id/image_water_intake"/>
+                    <TextView
+                        android:id="@+id/water_intake_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_margin="3dp"
+                        android:text="Keep you healthy and help you lose weight!"
+                        android:textStyle="normal"
+                        android:layout_below="@id/image_water_intake"
+                        android:layout_centerHorizontal="true"/>
+
+                    <Button
+                        android:id="@+id/set_water_intake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/water_intake_desc"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button_background_2"
+                        android:paddingStart="35dp"
+                        android:paddingEnd="35dp"
+                        android:text="Set water intake"
+                        android:textSize="13sp"
+                        android:textStyle="normal" />
+                    <TextView
+                        android:id="@+id/show_total_water_take"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1/8"
+                        android:visibility="gone"
+                        android:layout_below="@id/water_intake_desc"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/water_intake"
+                        android:visibility="gone"
+                        android:layout_below="@id/show_total_water_take"
+                        android:layout_margin="10dp"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_bmi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/image_bmi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/measure_bmi"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BMI"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@id/image_bmi"/>
+                    <TextView
+                        android:id="@+id/bmi_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_margin="3dp"
+                        android:text="Check your BMI and set your goal!"
+                        android:textStyle="normal"
+                        android:layout_below="@id/image_bmi"
+                        android:layout_centerHorizontal="true"/>
+
+                    <Button
+                        android:id="@+id/calculate_bmi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/bmi_desc"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button_background_2"
+                        android:paddingStart="35dp"
+                        android:paddingEnd="35dp"
+                        android:text="Calculate"
+                        android:textSize="13sp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_body_measure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/image_body_measure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/measure_body"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Body Measurement"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@id/image_body_measure"/>
+                    <TextView
+                        android:id="@+id/body_measure_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_margin="3dp"
+                        android:text="Track your body transformation!"
+                        android:textStyle="normal"
+                        android:layout_below="@id/image_body_measure"
+                        android:layout_centerHorizontal="true"/>
+
+                    <Button
+                        android:id="@+id/measure_body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/body_measure_desc"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button_background_2"
+                        android:paddingStart="35dp"
+                        android:paddingEnd="35dp"
+                        android:text="Measure"
+                        android:textSize="13sp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
