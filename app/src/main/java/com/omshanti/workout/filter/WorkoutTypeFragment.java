@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.omshanti.workout.R;
+import com.omshanti.workout.component.AppEnv;
 
 public class WorkoutTypeFragment extends Fragment {
     ImageView imageViewHome, imageViewGym;
     RelativeLayout relativeLayoutHome, relativeLayoutGym;
     Fragment fragment;
+    AppEnv appEnv;
+
     public WorkoutTypeFragment() {
         // Required empty public constructor
     }
@@ -28,7 +31,7 @@ public class WorkoutTypeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_workout_type, container, false);
-
+        appEnv = (AppEnv) getActivity().getApplicationContext();
         imageViewGym = (ImageView) view.findViewById(R.id.workout_gym);
         relativeLayoutGym = (RelativeLayout) view.findViewById(R.id.relative_gym_workout);
         imageViewHome = (ImageView) view.findViewById(R.id.workout_home);
@@ -41,10 +44,16 @@ public class WorkoutTypeFragment extends Fragment {
                 .load(R.drawable.nepal_flag)
                 .into(imageViewGym);
 
+        String getworkType = appEnv.sharePerference.getWorkoutType();
+        if (!getworkType.equals("")){
+            startMainActivity();
+        }
         relativeLayoutHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "selected Home", Toast.LENGTH_SHORT).show();
+                String txt = "Home";
+                appEnv.sharePerference.setWorkoutType(txt);
                 fragment = new BodyPartFragment();
                 setFragment(fragment);
             }
@@ -53,11 +62,21 @@ public class WorkoutTypeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "selected Gym", Toast.LENGTH_SHORT).show();
+                String txt = "Gym";
+                appEnv.sharePerference.setWorkoutType(txt);
                 fragment = new BodyPartFragment();
                 setFragment(fragment);
             }
         });
         return view;
+    }
+
+    private void startMainActivity() {
+        BodyPartFragment fragment = new BodyPartFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment, "findFragment")
+                .addToBackStack(null)
+                .commit();
     }
 
     private void setFragment(Fragment fragment) {

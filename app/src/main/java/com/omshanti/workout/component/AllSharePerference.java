@@ -6,6 +6,14 @@ import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.omshanti.workout.model.FilterHW;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AllSharePerference {
     private Context mContext;
     SharedPreferences sharedPreferences;
@@ -47,19 +55,24 @@ public class AllSharePerference {
         return sharedPreferences.getString("selectedPlace", "");
     }
     //Body Part
-    public boolean setBodyPart(String gender) {
+    public boolean setBodyPart(ArrayList<String> stringArrayList) {
         Editor editor =sharedPreferences.edit();
-        editor.putString("selectedArea", gender);
+        Gson gson = new Gson();
+        String json = gson.toJson(stringArrayList);
+        editor.putString("selectedArea", json);
         editor.commit();
         return true;
     }
-    public String getBodyPart() {
-        return sharedPreferences.getString("selectedArea", "");
+    public ArrayList<String> getBodyPart() {
+        Gson gson =new Gson();
+        String json = sharedPreferences.getString("selectedArea", "");
+        Type type = new TypeToken<List<String>>(){}.getType();
+        return gson.fromJson(json,type);
     }
     //Main Goal
-    public boolean setGoal(String gender) {
+    public boolean setGoal(String goal) {
         Editor editor =sharedPreferences.edit();
-        editor.putString("selectedGoal", gender);
+        editor.putString("selectedGoal", goal);
         editor.commit();
         return true;
     }
@@ -67,9 +80,9 @@ public class AllSharePerference {
         return sharedPreferences.getString("selectedGoal", "");
     }
     //Activity Level
-    public boolean setActivityLevel(String gender) {
+    public boolean setActivityLevel(String level) {
         Editor editor =sharedPreferences.edit();
-        editor.putString("selectedActivityLevel", gender);
+        editor.putString("selectedActivityLevel", level);
         editor.commit();
         return true;
     }
@@ -77,20 +90,34 @@ public class AllSharePerference {
         return sharedPreferences.getString("selectedActivityLevel", "");
     }
     //Weight & Height
-    public boolean setHeiWei(String gender) {
+    public boolean setHeiWei(ArrayList<FilterHW> hw) {
         Editor editor =sharedPreferences.edit();
-        editor.putString("selectedHeightWeight", gender);
+        Gson gson = new Gson();
+        String json = gson.toJson(hw);
+        editor.putString("selectedHeightWeight", json);
         editor.commit();
         return true;
     }
-    public String getHeiWei() {
+    public String getTestFormate(){
         return sharedPreferences.getString("selectedHeightWeight", "");
     }
-
-
-
+    public ArrayList<FilterHW> getHeiWei() {
+        Gson gson =new Gson();
+        String json = sharedPreferences.getString("selectedHeightWeight", "");
+        Type type = new TypeToken<List<FilterHW>>(){}.getType();
+        return gson.fromJson(json,type);
+    }
     //Daily Fragment Part
     //Step Count
+    public boolean setStepGoal(boolean step) {
+        Editor editor =sharedPreferences.edit();
+        editor.putBoolean("stepTarget", step);
+        editor.commit();
+        return true;
+    }
+    public boolean getStepGoal() {
+        return sharedPreferences.getBoolean("stepTarget", true);
+    }
     public boolean setStep(boolean step) {
         Editor editor =sharedPreferences.edit();
         editor.putBoolean("stepTarget", step);
@@ -100,5 +127,18 @@ public class AllSharePerference {
     public boolean getStep() {
         return sharedPreferences.getBoolean("stepTarget", true);
     }
-
+    //Water Track
+    public boolean setWater(int take, int taken) {
+        Editor editor =sharedPreferences.edit();
+        editor.putInt("waterTarget", take);
+        editor.putInt("waterTaken", taken);
+        editor.commit();
+        return true;
+    }
+    public int[] getWater() {
+        int target = sharedPreferences.getInt("waterTarget", 0);
+        int taken = sharedPreferences.getInt("waterTaken", 0);
+//        String trow = String.valueOf(target)+"/"+String.valueOf(taken);
+        return new int[] {target , taken};
+    }
 }

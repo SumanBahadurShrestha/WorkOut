@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.omshanti.workout.R;
 import com.omshanti.workout.adapter.MainGoalAdapter;
+import com.omshanti.workout.component.AppEnv;
 import com.omshanti.workout.model.SelectGoal;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class MainGoalFragment extends Fragment {
     MainGoalAdapter adapter;
     String selecedOne = "";
     Button buttonNext;
+    AppEnv appEnv;
     public MainGoalFragment() {
         // Required empty public constructor
     }
@@ -34,6 +36,7 @@ public class MainGoalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_goal, container, false);
+        appEnv = (AppEnv) getActivity().getApplicationContext();
         arrayList = new ArrayList<SelectGoal>();
         arrayList.add(new SelectGoal("Love", R.drawable.dummy_weight_loss));
         arrayList.add(new SelectGoal("Hate", R.drawable.dummy_weight_loss));
@@ -43,6 +46,10 @@ public class MainGoalFragment extends Fragment {
         buttonNext = (Button) view.findViewById(R.id.move_ahead);
         adapter = new MainGoalAdapter(getContext(), arrayList);
         listView.setAdapter(adapter);
+
+        String getselectedGoal = appEnv.sharePerference.getGoal();
+        if (!getselectedGoal.equals(""))
+            startMainActivity();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,6 +66,8 @@ public class MainGoalFragment extends Fragment {
                 if (selecedOne==""){
                     Toast.makeText(getContext(), "select one", Toast.LENGTH_SHORT).show();
                 }else {
+                    Toast.makeText(getContext(), "select one: "+selecedOne, Toast.LENGTH_SHORT).show();
+                    appEnv.sharePerference.setGoal(selecedOne);
                     Fragment fragment = new ActivityLevelFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragmentContainer, fragment);
@@ -68,5 +77,13 @@ public class MainGoalFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void startMainActivity() {
+        ActivityLevelFragment fragment = new ActivityLevelFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment, "findFragment")
+                .addToBackStack(null)
+                .commit();
     }
 }

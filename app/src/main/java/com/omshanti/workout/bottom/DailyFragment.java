@@ -50,7 +50,7 @@ public class DailyFragment extends Fragment {
         textViewShowStep = (TextView) view.findViewById(R.id.show_total_step);
         progressBarStep = (ProgressBar) view.findViewById(R.id.progress_bar);
         //get value
-        boolean getstepvalue = appEnv.sharePerference.getStep();
+        boolean getstepvalue = appEnv.sharePerference.getStepGoal();
         if (getstepvalue) {
             buttonStep.setVisibility(View.VISIBLE);
             textViewShowStep.setVisibility(View.GONE);

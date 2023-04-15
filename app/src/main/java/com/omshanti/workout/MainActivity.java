@@ -20,15 +20,31 @@ import com.omshanti.workout.bottom.DailyFragment;
 import com.omshanti.workout.bottom.ReportFragment;
 import com.omshanti.workout.bottom.SettingFragment;
 import com.omshanti.workout.bottom.TrainingFragment;
+import com.omshanti.workout.component.AppEnv;
+import com.omshanti.workout.model.FilterHW;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
     boolean doubleBackToExitPressedOnce = false;
+    AppEnv appEnv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        appEnv = (AppEnv) getApplicationContext();
+        ArrayList<String> stringArrayList = appEnv.sharePerference.getBodyPart();
+        ArrayList<FilterHW> arrayList = appEnv.sharePerference.getHeiWei();
+        System.out.println(
+                appEnv.sharePerference.getGender() + " " +
+                appEnv.sharePerference.getWorkoutType() + " " +
+                        stringArrayList.size() + " " +
+                appEnv.sharePerference.getGoal() + " " +
+                appEnv.sharePerference.getActivityLevel() + " "+
+                arrayList.size()
+        );
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(itemSelectedListener);

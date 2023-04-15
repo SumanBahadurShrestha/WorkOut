@@ -7,29 +7,132 @@
     tools:context=".daily.StepActivity">
 
     <LinearLayout
+        android:id="@+id/calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="1">
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+                <RadioButton
+                    android:id="@+id/radio_button_male"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Male"/>
+                <RadioButton
+                    android:id="@+id/radio_button_female"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Female"/>
+            </RadioGroup>
+            <EditText
+                android:id="@+id/edit_text_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="age"
+                android:layout_margin="5dp"
+                android:inputType="number"/>
+            <EditText
+                android:id="@+id/edit_text_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="weight"
+                android:layout_margin="5dp"
+                android:inputType="number"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+                <EditText
+                    android:id="@+id/edit_text_ft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ft"
+                    android:layout_weight="1"
+                    android:inputType="number"/>
+                <EditText
+                    android:id="@+id/edit_text_inch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="inch"
+                    android:layout_weight="1"
+                    android:inputType="number"/>
+            </LinearLayout>
+            <Spinner
+                android:id="@+id/spinner_active_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/levelofactivity"
+                android:layout_margin="5dp"/>
+
+            <Button
+                android:id="@+id/button_calculate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculate"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_margin="5dp">
+            <TextView
+                android:text="Your Total step to ealk is ..."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/step_total_step"
+                android:text="@string/app_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
         android:padding="5dp"
         android:layout_margin="5dp">
         <TextView
+            android:id="@+id/textviewX"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="X"/>
         <TextView
+            android:id="@+id/textviewY"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Y"/>
         <TextView
+            android:id="@+id/textviewZ"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Z"/>
     </LinearLayout>
+    
     <!--Text View for the "Steps" displayed-->
     <TextView
         android:id="@+id/steps"
@@ -71,13 +174,12 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
+    
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="set Goal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

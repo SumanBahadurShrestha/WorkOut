@@ -18,11 +18,13 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.omshanti.workout.R;
 import com.omshanti.workout.adapter.BodypartAdapter;
+import com.omshanti.workout.component.AppEnv;
 import com.omshanti.workout.model.BodyPart;
 
 import java.util.ArrayList;
 
 public class BodyPartFragment extends Fragment {
+    AppEnv appEnv;
     ListView listView;
     ArrayList<BodyPart> listItem;
     BodypartAdapter bodypartAdapter;
@@ -40,7 +42,7 @@ public class BodyPartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_body_part, container, false);
-
+        appEnv = (AppEnv) getActivity().getApplicationContext();
         listView = (ListView) view.findViewById(R.id.focus_area_list);
         buttonNext = (Button) view.findViewById(R.id.move_forward);
         listItem = new ArrayList<BodyPart>();
@@ -84,6 +86,11 @@ public class BodyPartFragment extends Fragment {
             }
         });
         selectedPart = new ArrayList<String>();
+        //shareperferance
+        ArrayList<String> arrayList = appEnv.sharePerference.getBodyPart();
+        if (arrayList != null){
+            startMainActivity();
+        }
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +101,7 @@ public class BodyPartFragment extends Fragment {
                         selectedPart.add(bodyPart.getTitle());
                     }
                 }
+                appEnv.sharePerference.setBodyPart(selectedPart);
                 Toast.makeText(getContext(), "selected: "+selectedPart.size() + selectedPart , Toast.LENGTH_SHORT).show();
                 Fragment fragment = new MainGoalFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -103,5 +111,13 @@ public class BodyPartFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void startMainActivity() {
+        MainGoalFragment fragment = new MainGoalFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment, "findFragment")
+                .addToBackStack(null)
+                .commit();
     }
 }

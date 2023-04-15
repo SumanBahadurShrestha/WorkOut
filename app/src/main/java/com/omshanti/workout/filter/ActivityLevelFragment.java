@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.omshanti.workout.R;
 import com.omshanti.workout.adapter.ActivityLevelAdapter;
+import com.omshanti.workout.component.AppEnv;
 import com.omshanti.workout.model.ActivityLevel;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class ActivityLevelFragment extends Fragment {
     ActivityLevelAdapter levelAdapter;
     String selectedLevel = "";
     Button buttonNext;
+    AppEnv appEnv;
     public ActivityLevelFragment() {
         // Required empty public constructor
     }
@@ -34,6 +36,7 @@ public class ActivityLevelFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activity_level, container, false);
+        appEnv = (AppEnv) getActivity().getApplicationContext();
         listView = (ListView) view.findViewById(R.id.Activity_level_list);
         buttonNext = (Button) view.findViewById(R.id.move_next);
         arrayList = new ArrayList<ActivityLevel>();
@@ -43,6 +46,10 @@ public class ActivityLevelFragment extends Fragment {
         arrayList.add(new ActivityLevel(R.drawable.level_very, "Very Active", false));
         levelAdapter = new ActivityLevelAdapter(getContext(), arrayList);
         listView.setAdapter(levelAdapter);
+        String getselectedLevel = appEnv.sharePerference.getActivityLevel();
+        if (!getselectedLevel.equals("")){
+            startMainActivity();
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -56,6 +63,7 @@ public class ActivityLevelFragment extends Fragment {
                 if (selectedLevel == ""){
                     Toast.makeText(getContext(), "empty", Toast.LENGTH_SHORT).show();
                 }else{
+                    appEnv.sharePerference.setActivityLevel(selectedLevel);
                     Fragment fragment = new WeightHeightFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragmentContainer, fragment);
@@ -66,5 +74,13 @@ public class ActivityLevelFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void startMainActivity() {
+        WeightHeightFragment fragment = new WeightHeightFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment, "findFragment")
+                .addToBackStack(null)
+                .commit();
     }
 }

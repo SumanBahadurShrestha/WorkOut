@@ -1,10 +1,12 @@
 package com.omshanti.workout.filter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -13,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.omshanti.workout.FilterContainerActivity;
 import com.omshanti.workout.R;
+import com.omshanti.workout.WelcomScreenActivity;
 import com.omshanti.workout.component.AppEnv;
 
 public class GenderFragment extends Fragment {
@@ -34,21 +38,24 @@ public class GenderFragment extends Fragment {
         cardViewFemale = (CardView) view.findViewById(R.id.female_Cardview);
         buttonNext = (Button) view.findViewById(R.id.moveToNext);
         String getselectedGender = appEnv.sharePerference.getGender();
-        if (getselectedGender == "female"){
-            selecedGender = "female";
-            cardViewMale.setAlpha(0.5f);
-            cardViewFemale.setAlpha(1f);
-            cardViewFemale.setCardElevation(5f);
-            showButton();
-        } else if (getselectedGender == "male"){
-            selecedGender = "male";
-            cardViewFemale.setAlpha(0.5f);
-            cardViewMale.setAlpha(1);
-            cardViewMale.setCardElevation(5f);
-            showButton();
-        }else{
-            selecedGender = "";
+        if (!getselectedGender.equals("")){
+            startMainActivity();
         }
+//        if (getselectedGender.equals("female")){
+//            selecedGender = "female";
+//            cardViewMale.setAlpha(0.5f);
+//            cardViewFemale.setAlpha(1f);
+//            cardViewFemale.setCardElevation(5f);
+//            showButton();
+//        } else if (getselectedGender.equals("male")){
+//            selecedGender = "male";
+//            cardViewFemale.setAlpha(0.5f);
+//            cardViewMale.setAlpha(1);
+//            cardViewMale.setCardElevation(5f);
+//            showButton();
+//        }else{
+//            selecedGender = "";
+//        }
 
         cardViewFemale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +79,13 @@ public class GenderFragment extends Fragment {
         });
 
         return view;
+    }
+    private void startMainActivity() {
+        WorkoutTypeFragment fragment = new WorkoutTypeFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment, "findFragment")
+                .addToBackStack(null)
+                .commit();
     }
 
     private void showButton() {
