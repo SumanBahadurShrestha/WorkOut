@@ -128,17 +128,18 @@ public class AllSharePerference {
         return sharedPreferences.getBoolean("stepTarget", true);
     }
     //Water Track
-    public boolean setWater(int take, int taken) {
+//    public boolean setWater(int take, int taken) {
+    public boolean setWater(int target) {
         Editor editor =sharedPreferences.edit();
-        editor.putInt("waterTarget", take);
-        editor.putInt("waterTaken", taken);
+        editor.putInt("waterTarget", target);
+//        editor.putInt("waterTaken", taken);
         editor.commit();
         return true;
     }
-    public int[] getWater() {
-        int target = sharedPreferences.getInt("waterTarget", 0);
-        int taken = sharedPreferences.getInt("waterTaken", 0);
+    public int getWater() {
+        return sharedPreferences.getInt("waterTarget", 0);
+//        int taken = sharedPreferences.getInt("waterTaken", 0);
 //        String trow = String.valueOf(target)+"/"+String.valueOf(taken);
-        return new int[] {target , taken};
+//        return new int[] {target , taken};
     }
 }

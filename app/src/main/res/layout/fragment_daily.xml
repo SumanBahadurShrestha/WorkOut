@@ -50,7 +50,8 @@
                 app:cardElevation="3dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
                     <ImageView
                         android:id="@+id/image_step_count"
                         android:layout_width="wrap_content"
@@ -78,23 +79,6 @@
                         android:textStyle="normal"
                         android:layout_below="@id/image_step_count"
                         android:layout_centerHorizontal="true"/>
-
-                    <Button
-                        android:id="@+id/set_step"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/step_cout_desc"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_background_2"
-                        android:paddingStart="35dp"
-                        android:paddingEnd="35dp"
-                        android:text="Set Step"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
                     <TextView
                         android:id="@+id/show_total_step"
                         android:layout_width="wrap_content"
@@ -128,7 +112,8 @@
                 app:cardElevation="3dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
                     <ImageView
                         android:id="@+id/image_water_intake"
                         android:layout_width="wrap_content"
@@ -157,22 +142,6 @@
                         android:layout_below="@id/image_water_intake"
                         android:layout_centerHorizontal="true"/>
 
-                    <Button
-                        android:id="@+id/set_water_intake"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/water_intake_desc"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_background_2"
-                        android:paddingStart="35dp"
-                        android:paddingEnd="35dp"
-                        android:text="Set water intake"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
                     <TextView
                         android:id="@+id/show_total_water_take"
                         android:layout_width="wrap_content"
@@ -201,7 +170,8 @@
                 app:cardElevation="3dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
                     <ImageView
                         android:id="@+id/image_bmi"
                         android:layout_width="wrap_content"
@@ -229,23 +199,6 @@
                         android:textStyle="normal"
                         android:layout_below="@id/image_bmi"
                         android:layout_centerHorizontal="true"/>
-
-                    <Button
-                        android:id="@+id/calculate_bmi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/bmi_desc"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_background_2"
-                        android:paddingStart="35dp"
-                        android:paddingEnd="35dp"
-                        android:text="Calculate"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -257,7 +210,8 @@
                 app:cardElevation="3dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
                     <ImageView
                         android:id="@+id/image_body_measure"
                         android:layout_width="wrap_content"
@@ -285,23 +239,6 @@
                         android:textStyle="normal"
                         android:layout_below="@id/image_body_measure"
                         android:layout_centerHorizontal="true"/>
-
-                    <Button
-                        android:id="@+id/measure_body"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/body_measure_desc"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_background_2"
-                        android:paddingStart="35dp"
-                        android:paddingEnd="35dp"
-                        android:text="Measure"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

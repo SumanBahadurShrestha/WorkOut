@@ -49,9 +49,6 @@ public class StepActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
         appEnv = (AppEnv) getApplicationContext();
-        Intent intent = getIntent();
-        Boolean already = intent.getBooleanExtra("setStep", true);
-        System.out.println(already); //true
         initget();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
