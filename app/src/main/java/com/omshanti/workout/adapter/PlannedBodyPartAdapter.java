@@ -14,11 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.omshanti.workout.R;
 
+import java.util.ArrayList;
+
 public class PlannedBodyPartAdapter extends RecyclerView.Adapter<PlannedBodyPartAdapter.ViewHolder> {
     private Context mContext;
+    ArrayList<String> selectedPart;
 
-    public PlannedBodyPartAdapter(Context mContext) {
+    public PlannedBodyPartAdapter(Context mContext, ArrayList<String> selectedPart) {
         this.mContext = mContext;
+        this.selectedPart = selectedPart;
     }
 
     @NonNull
@@ -30,12 +34,13 @@ public class PlannedBodyPartAdapter extends RecyclerView.Adapter<PlannedBodyPart
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textViewTitle.setText(String.format("Row number%d", position));
+//        holder.textViewTitle.setText(String.format("Row number%d", position));
+        holder.textViewTitle.setText(selectedPart.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return selectedPart.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

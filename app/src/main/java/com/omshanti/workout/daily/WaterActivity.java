@@ -1,12 +1,20 @@
 package com.omshanti.workout.daily;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.res.ResourcesCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +30,11 @@ import com.omshanti.workout.component.AppEnv;
 import com.omshanti.workout.database.sqlite.DailyDatabaseHandler;
 import com.omshanti.workout.database.sqlite.DailyReport;
 
+import java.util.ResourceBundle;
+
 public class WaterActivity extends AppCompatActivity {
+    private static final String CHANNEL_ID = "My Channel";
+    private static final Integer NOTIFICATION_ID = 200;
     AppEnv appEnv;
     TextInputEditText textInputEditTextAge, textInputEditTextWeight;
     MaterialButton materialButtonCal;
@@ -56,7 +68,6 @@ public class WaterActivity extends AppCompatActivity {
         textViewShowWaterTook = (TextView) findViewById(R.id.textView_watertook);
         buttonSetValue = (Button) findViewById(R.id.buttonAddWater);
         //getValue
-
         if (appEnv.holdDbId == 0) {
             savedwater = appEnv.sharePerference.getWater();
             takenglass = 0;
@@ -113,10 +124,12 @@ public class WaterActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (process <= totalGlasses) {
-                    process += 1;
-                    UpdateProgress();
+                if (process < totalGlasses) {
+                   process += 1;
+                   UpdateProgress();
                 }
+                if (process == totalGlasses)
+                    Toast.makeText(WaterActivity.this, "sufficient water for today", Toast.LENGTH_SHORT).show();
             }
         });
         buttonSetValue.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +167,34 @@ public class WaterActivity extends AppCompatActivity {
         progressBarCircle.setProgress(process);
         databaseHandler.updateAddWater(appEnv.holdDbId, process);
         if (process == totalGlasses){
+//notification
+//            Drawable drawable = ResourcesCompat.getDrawable(getResources(),R.drawable.water_intake, null);
+//            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+//            Bitmap bitmap  = bitmapDrawable.getBitmap();
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                mBuilder.setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.water_intake))
+                        .setSmallIcon(R.drawable.dummy_img)
+                        .setContentText("Water Task Complete")
+                        .setSubText("Target completed.")
+                        .setAutoCancel(true)
+                        .setChannelId(CHANNEL_ID);
+                Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                mBuilder.setSound(soundUri);
+                notificationManager.createNotificationChannel(new NotificationChannel(CHANNEL_ID, "New Channel", NotificationManager.IMPORTANCE_HIGH));
+            }else{
+                mBuilder.setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.water_intake))
+                        .setSmallIcon(R.drawable.dummy_img)
+                        .setContentText("Water Task Complete")
+                        .setAutoCancel(true)
+                        .setSubText("Target completed.");
+                Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                mBuilder.setSound(soundUri);
+            }
+            Notification notificationWater = mBuilder.build();
+            notificationManager.notify(NOTIFICATION_ID, notificationWater);
+
             Toast.makeText(this, "water completed", Toast.LENGTH_SHORT).show();
         }
     }

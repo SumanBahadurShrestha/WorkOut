@@ -17,6 +17,7 @@ import com.omshanti.workout.R;
 import com.omshanti.workout.adapter.PartLevelAdapter;
 import com.omshanti.workout.adapter.PlannedBodyPartAdapter;
 import com.omshanti.workout.adapter.TrainingChallengeAdapter;
+import com.omshanti.workout.component.AppEnv;
 import com.omshanti.workout.component.ListViewHelper;
 import com.omshanti.workout.model.PartLevel;
 import com.omshanti.workout.model.TChallenge;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TrainingFragment extends Fragment {
+    AppEnv appEnv;
     Context mContext;
     ViewPager2 viewpager;
     PlannedBodyPartAdapter bodyPartAdapter;
@@ -45,12 +47,14 @@ public class TrainingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_training, container, false);
+        appEnv = (AppEnv) getActivity().getApplicationContext();
         mContext = getContext();
         viewpager = (ViewPager2) view.findViewById(R.id.viewPager2);
         listViewFixed = (ListView) view.findViewById(R.id.listView_fix_plan);
         listViewChest = (ListView) view.findViewById(R.id.listView_chest);
         listViewLeg = (ListView) view.findViewById(R.id.listView_leg);
-        bodyPartAdapter = new PlannedBodyPartAdapter(mContext);
+        ArrayList<String> selectedPart = appEnv.sharePerference.getBodyPart();
+        bodyPartAdapter = new PlannedBodyPartAdapter(mContext, selectedPart);
         viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewpager.setOffscreenPageLimit(3);
         viewpager.setAdapter(bodyPartAdapter);

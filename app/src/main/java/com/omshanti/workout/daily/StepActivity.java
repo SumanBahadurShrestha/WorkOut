@@ -25,22 +25,13 @@ import com.omshanti.workout.component.AppEnv;
 
 public class StepActivity extends AppCompatActivity implements SensorEventListener {
     AppEnv appEnv;
-    //calculation
     Spinner spinner;
-    TextView textViewstep;
-    //display
     TextView textViewStep, textViewX, textViewY, textViewZ;
-    //button
     Button button;
-    //sensor Manager
     SensorManager sensorManager;
     Sensor stepSensor;
-    // Gravity for accelerometer data
     private float[] gravity = new float[3];
-    // smoothed values
     private float[] smoothed = new float[3];
-    //value store
-    //boolean running = false;
     float totalsteps = 0, prevTotalStep = 0;
     int stepCount = 0, pointtoStop;
 
@@ -54,7 +45,6 @@ public class StepActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 System.out.println("eya eya ho " + spinner.getSelectedItem().toString() + spinner.getSelectedItemId());
-
             }
 
             @Override
@@ -75,9 +65,8 @@ public class StepActivity extends AppCompatActivity implements SensorEventListen
 
     private void initget() {
         //calculation
-        textViewstep = (TextView) findViewById(R.id.step_total_step);
         spinner = (Spinner) findViewById(R.id.spinner_active_level);
-        button = (Button) findViewById(R.id.button);
+        button = (Button) findViewById(R.id.btnSetGoal);
         textViewX = (TextView) findViewById(R.id.textviewX);
         textViewY = (TextView) findViewById(R.id.textviewY);
         textViewZ = (TextView) findViewById(R.id.textviewZ);

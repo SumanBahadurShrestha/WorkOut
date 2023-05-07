@@ -17,13 +17,14 @@ import com.omshanti.workout.R;
 import com.omshanti.workout.component.AppEnv;
 import com.omshanti.workout.daily.BMIActivity;
 import com.omshanti.workout.daily.BodyMeasureActivity;
+import com.omshanti.workout.daily.CaloriesBurnedActivity;
 import com.omshanti.workout.daily.StepActivity;
 import com.omshanti.workout.daily.WaterActivity;
 
 public class DailyFragment extends Fragment {
     AppEnv appEnv;
     Context mContext;
-    CardView cardViewstep, cardViewwater, cardViewbmi, cardViewmeasure;
+    CardView cardViewstep, cardViewwater, cardViewbmi, cardViewcalbrn, cardViewmeasure;
     //hidden part
     TextView textViewShowStep;
     ProgressBar progressBarStep;
@@ -41,6 +42,7 @@ public class DailyFragment extends Fragment {
         cardViewstep = (CardView) view.findViewById(R.id.cardView_step_count);
         cardViewwater = (CardView) view.findViewById(R.id.cardView_water_intake);
         cardViewbmi = (CardView) view.findViewById(R.id.cardView_bmi);
+        cardViewcalbrn = (CardView) view.findViewById(R.id.cardView_cal_brn);
         cardViewmeasure = (CardView) view.findViewById(R.id.cardView_body_measure);
         textViewShowStep = (TextView) view.findViewById(R.id.show_total_step);
         progressBarStep = (ProgressBar) view.findViewById(R.id.progress_bar);
@@ -65,6 +67,12 @@ public class DailyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), BMIActivity.class));
+            }
+        });
+        cardViewcalbrn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), CaloriesBurnedActivity.class));
             }
         });
         cardViewmeasure.setOnClickListener(new View.OnClickListener() {

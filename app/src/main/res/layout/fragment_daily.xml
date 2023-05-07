@@ -202,6 +202,46 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_cal_brn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/image_cal_brn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/measure_bmi"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calories Burned"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_toRightOf="@id/image_cal_brn"/>
+                    <TextView
+                        android:id="@+id/cal_brn_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_margin="3dp"
+                        android:text="Check your BMI and set your goal!"
+                        android:textStyle="normal"
+                        android:layout_below="@id/image_cal_brn"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_body_measure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -218,11 +258,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/measure_body"/>
+                        android:src="@drawable/measure_type"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Body Measurement"
+                        android:text="Body Type"
                         android:textSize="18sp"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="5dp"
